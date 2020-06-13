@@ -1,5 +1,0 @@
-/*
-     NativeTypes.re
- */
-
-type node;

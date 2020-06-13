@@ -1,0 +1,1 @@
+let () = TreeSitterTest.TestFramework.cli ()

@@ -1,24 +1,20 @@
-/*
-     Parser.rei
- */
+type t
 
-type t;
+(* [json()] returns a new JSON parser *)
+val json : unit -> t
 
-/* [json()] returns a new JSON parser */
-let json: unit => t;
+(* [c()] returns a new C/C++ parser *)
+val c : unit -> t
 
-/* [c()] returns a new C/C++ parser */
-let c: unit => t;
-
-/*
+(*
    [parseString(parser, contents)] parses a string with [parser],
    returning a parsed syntax tree.
- */
-let parseString: (t, string) => Tree.t;
+ *)
+val parseString : t -> string -> Tree.t
 
-type readFunction = (int, int, int) => option(string);
+type readFunction = int -> int -> int -> string option
 
-/*
+(*
    [parse(parser, previousTree, readFunction)] parses arbitrary
    documents. The [readFunction] takes a [(byteOffset, line, column)]
    and returns an [option(string)] describing the results.
@@ -27,5 +23,5 @@ type readFunction = (int, int, int) => option(string);
    None should be used. A tree can be provided to speed up incremental parsing.
 
    Returns a [Tree.t] with the output of the parsing.
- */
-let parse: (t, option(Tree.t), readFunction) => Tree.t;
+ *)
+val parse : t -> Tree.t option -> readFunction -> Tree.t
